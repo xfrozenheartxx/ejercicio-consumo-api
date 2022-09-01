@@ -1,4 +1,5 @@
 // test data
+/*
 const fakeData=[
     {
         quote_id: 1,
@@ -25,28 +26,10 @@ const fakeData=[
         quote:"Pariatur anim qui tempor ea occaecat irure et consectetur ullamco aliqua dolor.",
         author: "Nombre de autor/a 5"
     },
-]
 
-// obtain data
+    
+] */
 
-function getData(displayFunction){
-
-    //enviar solocitud a API
-    const request= fetch("https://breakingbadapi.com/api/quotes")
-
-    request.then(function(response){
-     
-        response.json().then(function(data){
-
-            console.log("data", data)
-            displayFunction(data)
-        })
-
-
-    })
-
-    console.log("request", request)
-}
 
 // format data
 
@@ -83,11 +66,23 @@ function createQuote (quote){
     return newQuote
 }
 
+//interaction setup
+
+function setupInteraction (element){
+
+    element.addEventListener("click",function(event){
+    
+        const el = event.target
+        console.log(event.target.getAttribute("data-id"))
+    })
+}
+
 function displayQuote(quote){
 
     const container =document.querySelector("#information")
 
     const newQuote= createQuote(quote)
+    setupInteraction(newQuote)
 
     container.append(newQuote)
 
@@ -102,7 +97,7 @@ function displayQuotes(quotes){
 }
 
 function getAndDisplayQuotes(){
-    getData(displayQuotes)
+    getData("quotes", displayQuotes)
 
 
 }
